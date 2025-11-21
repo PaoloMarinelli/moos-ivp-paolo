@@ -18,19 +18,35 @@ ProcessConfig = ANTLER
   MSBetweenLaunches = 200
 
   Run = MOOSDB		@ NewConsole = false
-  Run = uSimMarine	@ NewConsole = false
+  Run = uSimMarineV22	@ NewConsole = false
   Run = pNodeReporter	@ NewConsole = false
-  Run = pMarinePID	@ NewConsole = false
+  Run = pMarinePIDV22	@ NewConsole = false
   Run = pMarineViewer	@ NewConsole = false
   Run = uProcessWatch   @ NewConsole = false
   Run = pHelmIvP	@ NewConsole = false
   Run = pOdometry	@ NewConsole = false
+  Run = pLogger  @ NewConsole = false
+}
+
+
+ProcessConfig = pLogger
+{
+  AppTick       = 10
+  CommsTick     = 10
+  
+  File          = XLOG_SHORESIDE
+  PATH          = ./
+  AsyncLog      = true
+  FileTimeStamp = true
+
+  // Log it all!!!!!
+  WildCardLogging = true 
 }
 
 //------------------------------------------
 // uSimMarine config block
 
-ProcessConfig = uSimMarine
+ProcessConfig = uSimMarineV22
 {
   AppTick	= 10
   CommsTick	= 10
@@ -86,7 +102,7 @@ ProcessConfig = pHelmIvP
 //------------------------------------------
 // pMarinePID config block
 
-ProcessConfig = pMarinePID
+ProcessConfig = pMarinePIDV22
 {
   AppTick    = 20
   CommsTick  = 20
@@ -143,8 +159,8 @@ ProcessConfig = pMarineViewer
   procs_font_size      = medium
   appcast_font_size    = small
 
-  BUTTON_ONE = DEPLOY # DEPLOY=true
-  BUTTON_ONE = MOOS_MANUAL_OVERIDE=false # RETURN=false
+  BUTTON_ONE = DEPLOY # DEPLOY=true # RESET_ODOMETRY=true
+  BUTTON_ONE = MOOS_MANUAL_OVERIDE=false # RETURN=false 
   BUTTON_TWO = RETURN # RETURN=true
 }
 
@@ -155,5 +171,16 @@ ProcessConfig = pNodeReporter
 {
   AppTick	= 2
   CommsTick	= 2
-  VESSEL_TYPE   = KAYAK
+  VESSEL_TYPE   = AUV
+}
+
+
+//------------------------------------------
+// pOdometry configuration  block
+ProcessConfig = pOdometry
+{
+  AppTick    = 1
+  CommsTick  = 1
+  time_threshold = 20
+  custom_unit = kilometers
 }
